@@ -3,6 +3,7 @@
 #include<string>
 #include<fstream>
 #include <cstdlib>
+#include<iomanip>
 using namespace std;
 
 // data validation for sign up process;
@@ -639,20 +640,28 @@ void view_master_case_list(string c_ids[], string c_names[], string c_stats[], d
         return;
     }
 
-    cout << "\n-----------------------------------------------------------------------------------------------------------\n";
-    cout << "ID\tClient\t\tStatus\t\tTotal\tPaid\tLawyer\tHearing Date\n";
-    cout << "-----------------------------------------------------------------------------------------------------------\n";
+    // Left align everything and set fixed widths for columns
+    cout << left << endl;
+    cout << "--------------------------------------------------------------------------------------------" << endl;
+    cout << setw(10) << "ID" 
+         << setw(18) << "Client" 
+         << setw(12) << "Status" 
+         << setw(10) << "Total" 
+         << setw(10) << "Paid" 
+         << setw(10) << "Lawyer" 
+         << setw(15) << "Hearing Date" << endl;
+    cout << "--------------------------------------------------------------------------------------------" << endl;
 
     for (int i = 0; i < c_count; i++) {
-        cout << c_ids[i] << "\t";
-        cout << c_names[i] << "\t\t"; // Double tab for longer names
-        cout << c_stats[i] << "\t\t";
-        cout << c_bills[i] << "\t";
-        cout << c_paid[i] << "\t";
-        cout << c_lids[i] << "\t";
-        cout << c_dates[i] << endl;
+        cout << setw(10) << c_ids[i]
+             << setw(18) << c_names[i]
+             << setw(12) << c_stats[i]
+             << setw(10) << c_bills[i]
+             << setw(10) << c_paid[i]
+             << setw(10) << c_lids[i]
+             << setw(15) << c_dates[i] << endl;
     }
-    cout << "-----------------------------------------------------------------------------------------------------------\n";
+    cout << "--------------------------------------------------------------------------------------------" << endl;
     
     // To keep the list on screen until the user is done reading
     cout << "Press Enter to return to menu...";
@@ -980,21 +989,35 @@ void personal_dashboard_lawyer(string c_ids[], string c_names[], string c_stats[
     bool foundAny = false;
 
     cout << "\n=========================================================================================\n";
-    cout << "                       MY PERSONAL CASE DASHBOARD (ID: " << currentLawyerBarID << ")\n";
+    cout << "                    MY PERSONAL CASE DASHBOARD (ID: " << currentLawyerBarID << ")\n";
     cout << "=========================================================================================\n";
-    cout << "ID\t\tClient Name\t\tStatus\t\tRemaining Bill\tNext Hearing\n";
+    
+    // Header with fixed widths
+    cout << left 
+         << setw(12) << "ID" 
+         << setw(20) << "Client Name" 
+         << setw(15) << "Status" 
+         << setw(20) << "Remaining Bill" 
+         << setw(15) << "Next Hearing" << endl;
     cout << "-----------------------------------------------------------------------------------------\n";
-
+    
     for (int i = 0; i < c_count; i++) {
         // Only show cases that match the current lawyer's Bar License
         if (c_lids[i] == currentLawyerBarID) {
             double remaining = c_bills[i] - c_paid[i];
             
-            cout << c_ids[i] << "\t\t";
-            cout << c_names[i] << "\t\t";
-            cout << c_stats[i] << "\t\t";
-            cout << remaining << " PKR\t\t";
-            cout << c_dates[i] << endl;
+            // cout << c_ids[i] << "\t\t";
+            // cout << c_names[i] << "\t\t";
+            // cout << c_stats[i] << "\t\t";
+            // cout << remaining << " PKR\t\t";
+            // cout << c_dates[i] << endl;
+            cout << left 
+                 << setw(12) << c_ids[i]
+                 << setw(20) << c_names[i]
+                 << setw(15) << c_stats[i];
+            cout << setw(20) << remaining<<"PKR" 
+            << setw(15) << c_dates[i] << endl;
+
             
             foundAny = true;
         }
