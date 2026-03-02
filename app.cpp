@@ -1015,7 +1015,7 @@ void personal_dashboard_lawyer(string c_ids[], string c_names[], string c_stats[
                  << setw(12) << c_ids[i]
                  << setw(20) << c_names[i]
                  << setw(15) << c_stats[i];
-            cout << setw(20) << remaining<<"PKR" 
+            cout << setw(10) << remaining<<setw(10)<<"PKR" 
             << setw(15) << c_dates[i] << endl;
 
             
